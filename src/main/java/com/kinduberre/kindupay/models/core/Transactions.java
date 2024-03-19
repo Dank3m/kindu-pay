@@ -21,4 +21,6 @@ public class Transactions {
     private String payerPhone;
     private String paymentMode;
     private String narration;
+    private String tranType;
+    private String shortCode;
 }
