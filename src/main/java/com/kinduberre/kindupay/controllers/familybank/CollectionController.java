@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CollectionController {
 
     //Validation
-    @PostMapping("/familybank/validation")
+    @PostMapping("/fbl/validation")
     public ValidationResponse validateClient(@RequestBody ValidationRequest validationRequest) {
         return new ValidationResponse();
     }
 
-    @PostMapping("/familybank/confirmation")
+    @PostMapping("/fbl/confirmation")
     public ConfirmationResponse confirmTransaction(@RequestBody ConfirmationRequest confirmationRequest) {
         return new ConfirmationResponse();
     }
