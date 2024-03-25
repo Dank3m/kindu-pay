@@ -2,9 +2,9 @@ package com.kinduberre.kindupay.controllers.familybank.auth;
 
 
 import com.kinduberre.kindupay.models.auth.User;
-import com.kinduberre.kindupay.models.dtos.RegistrationDto;
-import com.kinduberre.kindupay.models.dtos.TokenRequest;
-import com.kinduberre.kindupay.models.dtos.TokenResponse;
+import com.kinduberre.kindupay.models.dtos.familybank.RegistrationDto;
+import com.kinduberre.kindupay.models.dtos.familybank.TokenRequest;
+import com.kinduberre.kindupay.models.dtos.familybank.TokenResponse;
 import com.kinduberre.kindupay.services.AuthenticationService;
 import com.kinduberre.kindupay.services.JwtService;
 import org.springframework.http.ResponseEntity;

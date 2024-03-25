@@ -1,4 +1,4 @@
-package com.kinduberre.kindupay.models.dtos;
+package com.kinduberre.kindupay.models.dtos.familybank;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;

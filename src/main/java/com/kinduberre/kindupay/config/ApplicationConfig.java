@@ -1,6 +1,6 @@
 package com.kinduberre.kindupay.config;
 
-import com.kinduberre.kindupay.repositories.common.UserRepository;
+import com.kinduberre.kindupay.repositories.auth.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

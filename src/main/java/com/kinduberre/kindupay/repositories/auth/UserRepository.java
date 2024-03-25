@@ -1,4 +1,4 @@
-package com.kinduberre.kindupay.repositories.common;
+package com.kinduberre.kindupay.repositories.auth;
 
 import com.kinduberre.kindupay.models.auth.User;
 import org.springframework.data.jpa.repository.JpaRepository;

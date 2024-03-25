@@ -1,7 +1,7 @@
 package com.kinduberre.kindupay.services;
 
 import com.kinduberre.kindupay.models.auth.User;
-import com.kinduberre.kindupay.repositories.common.UserRepository;
+import com.kinduberre.kindupay.repositories.auth.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

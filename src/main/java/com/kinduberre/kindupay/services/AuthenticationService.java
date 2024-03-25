@@ -1,9 +1,9 @@
 package com.kinduberre.kindupay.services;
 
 import com.kinduberre.kindupay.models.auth.User;
-import com.kinduberre.kindupay.models.dtos.RegistrationDto;
-import com.kinduberre.kindupay.models.dtos.TokenRequest;
-import com.kinduberre.kindupay.repositories.common.UserRepository;
+import com.kinduberre.kindupay.models.dtos.familybank.RegistrationDto;
+import com.kinduberre.kindupay.models.dtos.familybank.TokenRequest;
+import com.kinduberre.kindupay.repositories.auth.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,6 +1,6 @@
 package com.kinduberre.kindupay.models.familybank;
 
-import com.kinduberre.kindupay.models.common.enums.IdentifierType;
+import com.kinduberre.kindupay.models.core.enums.IdentifierType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
