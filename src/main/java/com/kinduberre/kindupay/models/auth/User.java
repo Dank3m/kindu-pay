@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Date;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 
 @Data
@@ -32,6 +32,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Roles> roles = new HashSet<>();
+
     @CreationTimestamp
     @Column(updatable = false, name ="created_at")
     private Date createdAt;
@@ -42,7 +45,13 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+
+        List<GrantedAuthority> auths = new ArrayList<>();
+
+        for(Roles role : this.roles){
+            auths.add(new SimpleGrantedAuthority(role.getName().toUpperCase()));
+        }
+        return auths;
     }
 
     @Override
@@ -57,22 +66,22 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
 

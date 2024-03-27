@@ -1,7 +1,9 @@
 package com.kinduberre.kindupay.services;
 
+import com.kinduberre.kindupay.mappers.UserMapper;
 import com.kinduberre.kindupay.models.auth.User;
 import com.kinduberre.kindupay.models.dtos.familybank.RegistrationDto;
+import com.kinduberre.kindupay.models.dtos.familybank.RegistrationResponseDTO;
 import com.kinduberre.kindupay.models.dtos.familybank.TokenRequest;
 import com.kinduberre.kindupay.repositories.auth.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,9 +16,12 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public UserService (UserRepository userRepository) {
+    public UserService (UserRepository userRepository, UserMapper userMapper)
+    {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     public List<User> getAllUsers() {
@@ -25,7 +30,7 @@ public class UserService {
         return users;
     }
 
-    public User saveUser(RegistrationDto userRequest) {
+    public RegistrationResponseDTO saveUser(RegistrationDto userRequest) {
         if(userRequest.getClientId() == null){
             throw new RuntimeException("Parameter client_id is not found in request..!!");
         } else if(userRequest.getClientSecret() == null){
@@ -49,7 +54,7 @@ public class UserService {
                 throw new RuntimeException("Client with client_id: " + userRequest.getClientId() + " already exists");
             }
 
-        return savedUser;
+        return userMapper.userToRegistrationDTO(savedUser);
     }
 
 
