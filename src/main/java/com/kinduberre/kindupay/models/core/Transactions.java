@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -36,7 +36,7 @@ public class Transactions {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Customer customer;
 
-    private LocalDate tranDate;
+    private LocalDateTime tranDate;
     private String payerName;
     private String payerPhone;
     private String paymentMode;
