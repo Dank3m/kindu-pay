@@ -1,11 +1,10 @@
 package com.kinduberre.kindupay.controllers.familybank;
 
 import com.kinduberre.kindupay.models.core.Customer;
-import com.kinduberre.kindupay.models.familybank.ConfirmationRequest;
-import com.kinduberre.kindupay.models.familybank.ConfirmationResponse;
-import com.kinduberre.kindupay.models.familybank.ValidationRequest;
-import com.kinduberre.kindupay.models.familybank.ValidationResponse;
+import com.kinduberre.kindupay.models.familybank.*;
 import com.kinduberre.kindupay.services.CustomerService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/fbl")
 public class CollectionController {
 
 
@@ -29,9 +28,9 @@ public class CollectionController {
 
 
     //Validation
-    @PreAuthorize("hasRole('FBL_COLLECTIONS')")
-    @PostMapping("/fbl/validation")
-    public ValidationResponse validateClient(@RequestBody ValidationRequest validationRequest) {
+    @PreAuthorize("hasAuthority('FBL_COLLECTIONS')")
+    @PostMapping("/validation")
+    public ResponseEntity<ValidationResponse> validateClient(@RequestBody ValidationRequest validationRequest) {
         Optional<Customer> customer = customerService.findCustomerByCustRef(validationRequest.getPayload().getIdentifier());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         ValidationResponse validationResponse = new ValidationResponse();
@@ -47,16 +46,21 @@ public class CollectionController {
             validationResponse.getPayload().setIdentifier(customer.get().getCustRef());
             validationResponse.getPayload().setIdentifierType(customer.get().getIdentifierType());
             validationResponse.getPayload().setCustomerName(customer.get().getCustName());
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(validationResponse);
         } else {
             validationResponse.setStatusCode("ACCOUNT_NOT_FOUND");
             validationResponse.setStatusDescription("ACCOUNT IS NOT VALID");
             validationResponse.setDateTime(LocalDateTime.now().format(formatter));
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(validationResponse);
         }
-        return new ValidationResponse();
     }
 
-    @PreAuthorize("hasRole('FBL_COLLECTIONS')")
-    @PostMapping("/fbl/confirmation")
+    @PreAuthorize("hasAuthority('FBL_COLLECTIONS')")
+    @PostMapping("/confirmation")
     public ConfirmationResponse confirmTransaction(@RequestBody ConfirmationRequest confirmationRequest) {
         return new ConfirmationResponse();
     }

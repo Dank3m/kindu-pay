@@ -26,6 +26,13 @@ public class GlobalExceptionHandler {
             return errorDetail;
         }
 
+        if (exception instanceof MissingAuthHeaderException) {
+            errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(401), exception.getMessage());
+            errorDetail.setProperty("description", "No Authorization header in the request");
+
+            return errorDetail;
+        }
+
         if (exception instanceof AccountStatusException) {
             errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
             errorDetail.setProperty("description", "The account is locked");
