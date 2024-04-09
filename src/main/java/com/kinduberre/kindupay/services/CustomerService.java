@@ -18,4 +18,8 @@ public class CustomerService {
     {
         return customerRepository.findByCustRef(custRef);
     }
+
+    public Customer save(Customer customer) {
+        return customerRepository.save(customer);
+    }
 }
